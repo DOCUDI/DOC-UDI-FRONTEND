@@ -1,10 +1,14 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from "redux";
 
-import AuthReducer from './auth.reducer';
+import LoginReducer from "./login.reducer";
+import SignupReducer from "./signup.reducer";
+import SignoutReducer from "./signout.reducer";
 
 const allReducers = {
-	// Put all of the reducers here!
-	auth: AuthReducer,
+  // Put all of the reducers here!
+  signup: SignupReducer,
+  login: LoginReducer,
+  signout: SignoutReducer,
 };
 
 const rootReducer = combineReducers(allReducers);

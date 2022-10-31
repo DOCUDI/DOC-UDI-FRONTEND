@@ -1,6 +1,8 @@
 /* eslint-disable import/prefer-default-export */
 // Import all actions here!
-import * as AuthActions from './auth.action';
+import * as SignupActions from "./signup.action";
+import * as LoginActions from "./login.action";
+import * as SignoutActions from "./signout.action";
 
 // Export all actions here!
-export { AuthActions };
+export { SignupActions, LoginActions, SignoutActions };

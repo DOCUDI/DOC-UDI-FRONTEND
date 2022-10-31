@@ -31,13 +31,12 @@ export const CardBox = styled.div`
 
 export const SlotBox = styled.div`
   width: 25%;
-  height: 15vh;
+  height: 5vh;
   display: flex;
-  color: #fff;
   align-items: center;
   justify-content: center;
   margin: 1rem;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   background-color: #B7D0FF;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
   cursor: pointer;

@@ -1,13 +1,14 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  height: 100vh;
+  height: fit-content;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
   background-color: #f6f9fe;
+  padding-bottom: 2rem;
 `;
 
 export const SmallText = styled.p`
@@ -44,4 +45,12 @@ export const ButtonsContainer = styled.div`
     justify-content: space-around;
     width: 100%;
     margin-top: 1rem;
+`;
+
+export const CardBox = styled.div`
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
 `;
