@@ -69,7 +69,7 @@ const Slots = () => {
         </CardBox>
       </SlotsBoxContainer>
       <Button variant="contained" style={style1}>
-        Confirm
+        Finish Sign In
       </Button>
     </Container>
   );
