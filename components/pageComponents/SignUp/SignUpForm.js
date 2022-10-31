@@ -64,6 +64,7 @@ const SignUpForm = () => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     // console.log(timeslots)
     dispatch(signup(data));
+    
   };
 
   return (

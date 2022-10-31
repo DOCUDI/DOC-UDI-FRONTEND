@@ -24,7 +24,6 @@ export function* signup(action) {
   }
 }
 export function* login(action) {
-  console.log("in login");
   try {
     const res = yield call(loginService.login, action.payload);
     if (res.error) {

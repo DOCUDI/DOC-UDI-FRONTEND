@@ -1,32 +1,23 @@
 import { AuthTypes } from "../types";
 
 const initialState = {
-  name: "",
-  email: "",
-  password: "",
-  clinic_address: "",
-  specialization: "",
-  city: "",
-  time_slots: [
-    {
-      startTime: "",
-      endTime: "",
-    },
-    {
-      startTime: "",
-      endTime: "",
-    },
-  ],
-  consultation_fee: "",
-  working_days: [],
+  success: false,
+  user: {
+    fullname: "",
+    email: "",
+  },
+  token: "",
 };
 
 const LoginReducer = (state = initialState, action) => {
-  console.log(action);
+  // console.log(action);
   switch (action.type) {
   case AuthTypes.LOGIN_SUCCESS:
     return {
       ...state,
+      success: action.data.success,
+      user: action.data.user,
+      token: action.data.token
     };
   case AuthTypes.LOGIN_ERROR:
     return {
