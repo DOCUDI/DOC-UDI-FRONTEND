@@ -64,7 +64,7 @@ const ValidateAadhar = () => {
           variant="contained"
           style={style1}
         >
-          COnfirm
+          Confirm
         </Button>
       </Helper>
     </Container>
