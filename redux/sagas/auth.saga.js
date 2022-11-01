@@ -39,7 +39,7 @@ export function* login(action) {
   }
 }
 export function* signout(action) {
-  console.log("in signout");
+  console.log("action", action.payload);
   try {
     const res = yield call(signoutService.signout, action.payload);
     if (res.error) {

@@ -2,10 +2,7 @@ import { AuthTypes } from "../types";
 
 const initialState = {
   success: false,
-  user: {
-    fullname: "",
-    email: "",
-  },
+  user: {},
   token: "",
 };
 
@@ -17,7 +14,7 @@ const LoginReducer = (state = initialState, action) => {
       ...state,
       success: action.data.success,
       user: action.data.user,
-      token: action.data.token
+      token: action.data.token,
     };
   case AuthTypes.LOGIN_ERROR:
     return {

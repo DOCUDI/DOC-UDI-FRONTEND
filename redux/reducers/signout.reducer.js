@@ -19,6 +19,7 @@ const initialState = {
   ],
   consultation_fee: "",
   working_days: [],
+  success: false,
 };
 
 
@@ -28,10 +29,12 @@ const SignoutReducer = (state = initialState, action) => {
   case AuthTypes.SIGNOUT_SUCCESS:
     return {
       ...state,
+      success: true,
     };
   case AuthTypes.SIGNOUT_ERROR:
     return {
       ...state,
+      success: false,
     };
   default:
     return state;

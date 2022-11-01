@@ -11,11 +11,17 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import Logo from "../Images/Logo";
 import Link from "next/link";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { signout } from '../../../redux/actions/signout.action'
 
 const settings = ["Profile", "Dashboard", "Logout"];
 
 const Helmet = () => {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const dispatch = useDispatch();
+  const email = useSelector((state) => state.login.user.email);
+  const token = useSelector((state) => state.login.token);
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -23,6 +29,17 @@ const Helmet = () => {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+    const data = {
+      email,
+      token
+    };
+    // // eslint-disable-next-line react-hooks/rules-of-hooks
+    // // console.log(timeslots)
+    // console.log("data",data);
+    dispatch(signout(data));
+    // if (loggedIn) {
+    //   router.push("/Login");
+    // }
   };
 
   return (
