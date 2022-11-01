@@ -12,7 +12,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Logo from "../Images/Logo";
 import Link from "next/link";
 
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const settings = ["Profile", "Dashboard", "Logout"];
 
 const Helmet = () => {
   const [anchorElUser, setAnchorElUser] = React.useState(null);

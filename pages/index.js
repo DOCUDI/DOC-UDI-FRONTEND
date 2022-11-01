@@ -1,11 +1,20 @@
 import Head from "next/head";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { Container } from "../components/pageComponents/global/style";
 import Helmet from "../components/utils/Header/Helmet";
 import Landing from "./Landing";
-import SignUp from "./SignUp";
 
 export default function Home() {
-  const loggedIn = true;
+  const loggedIn = useSelector((state) => state.login.success);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!loggedIn) {
+      router.push("/Login");
+    }
+  }, [loggedIn, router])
   return (
     <div>
       <Head>
@@ -15,7 +24,7 @@ export default function Home() {
       </Head>
       <Container>
         <Helmet />
-        {loggedIn ? <Landing /> : <SignUp />}
+        <Landing />
       </Container>
     </div>
   );
