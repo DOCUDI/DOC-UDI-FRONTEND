@@ -14,8 +14,6 @@ import { FcGoogle } from "react-icons/fc";
 import { FaFacebook } from "react-icons/fa";
 import { login } from "../../../redux/actions/login.action";
 import { useDispatch } from "react-redux";
-import { useRouter } from "next/router";
-import { useSelector } from "react-redux";
 
 const LoginForm = () => {
   const theme = useTheme();
@@ -30,13 +28,11 @@ const LoginForm = () => {
     marginBottom: "1rem",
   };
 
-  const loggedIn = useSelector((state) => state.login.success);
-  const router = useRouter();
-
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -47,9 +43,13 @@ const LoginForm = () => {
     // // eslint-disable-next-line react-hooks/rules-of-hooks
     // // console.log(timeslots)
     dispatch(login(data));
-    if (loggedIn) {
-      router.push("/");
-    }
+    router.push("/");
+    // localStorage.setItem(
+    //   "token",
+    //   JSON.stringify({
+    //     email: data.email,
+    //     password: data.password,
+    //   }));
   };
 
   return (

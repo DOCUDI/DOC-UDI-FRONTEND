@@ -1,20 +1,29 @@
 import Head from "next/head";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
-import { useSelector } from "react-redux";
+// import { useRouter } from "next/router";
+// import { useEffect } from "react";
 import { Container } from "../components/pageComponents/global/style";
 import Helmet from "../components/utils/Header/Helmet";
 import Landing from "./Landing";
+import Login from "./Login";
+// import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import SignUp from "./SignUp";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+// import { useEffect } from "react";
+import { getAppointments } from "../redux/actions/upcomingappointments.action";
 
 export default function Home() {
-  const loggedIn = useSelector((state) => state.login.success);
-  const router = useRouter();
+  // let bool = false;
+  const isSignedIn = useSelector((state) => state.signup.success);
+  const isLoggedIn = useSelector((state) => state.login.success);
+  const dispatch = useDispatch();
+  const id = useSelector((state) => state.login.user._id);
 
   useEffect(() => {
-    if (!loggedIn) {
-      router.push("/Login");
-    }
-  }, [loggedIn, router])
+    dispatch(getAppointments({ id: id }));
+  }, [dispatch, id]);
+
   return (
     <div>
       <Head>
@@ -24,7 +33,10 @@ export default function Home() {
       </Head>
       <Container>
         <Helmet />
-        <Landing />
+        {/* {loggedIn ? <Landing /> : <Login />} */}
+        {isLoggedIn && <Landing />}
+        {isSignedIn && !isLoggedIn && <Login />}
+        {!isSignedIn && !isLoggedIn && <SignUp />}
       </Container>
     </div>
   );

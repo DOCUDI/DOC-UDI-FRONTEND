@@ -61,10 +61,7 @@ const SignUpForm = () => {
       consultation_fee: consultationfee,
       time_slots: timeslots,
     };
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    // console.log(timeslots)
     dispatch(signup(data));
-    
   };
 
   return (
@@ -158,7 +155,7 @@ const SignUpForm = () => {
           <Slot onSelectSlot={handleSlot} />
         </CardBox>
         <Button variant="contained" style={style} onClick={submitHandler}>
-          Sign In
+          Sign Up
         </Button>
         <HelperInner>
           <Divider

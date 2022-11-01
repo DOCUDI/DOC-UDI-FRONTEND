@@ -36,9 +36,9 @@ const Landing = () => {
               Start Appointment
             </Button>
           </Link>
-          <Link href={"/previousappointment"}>
+          <Link href={"/upcomingappointments"}>
             <Button variant="contained" style={style}>
-              Previous Appointments
+              Upcoming Appointments
             </Button>
           </Link>
         </ButtonGroup>

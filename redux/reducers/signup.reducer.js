@@ -1,6 +1,7 @@
 import { AuthTypes } from "../types";
 
 const initialState = {
+  _id: "",
   name: "",
   email: "",
   password: "",
@@ -19,6 +20,7 @@ const SignupReducer = (state = initialState, action) => {
   case AuthTypes.SIGNUP_SUCCESS:
     return {
       ...state,
+      _id: action.data.user._id,
       name: action.data.user.name,
       email: action.data.user.email,
       password: action.data.user.password,

@@ -1,11 +1,13 @@
 import { put, call, takeLatest, all } from "redux-saga/effects";
-import { SignupService, LoginService, SignoutService } from "../../services";
+import { SignupService, LoginService, SignoutService, AppointmentService, CurrentAppointmentService } from "../../services";
 // import { Login } from '../../services/auth.service';
 import { AuthTypes } from "../types";
 
 const signupService = new SignupService();
 const loginService = new LoginService();
 const signoutService = new SignoutService();
+const appointmentService = new AppointmentService();
+const currentAppointmentService = new CurrentAppointmentService();
 //Vehicle Sagas
 export function* signup(action) {
   console.log("in signup");
@@ -55,11 +57,47 @@ export function* signout(action) {
   }
 }
 
+export function* getAppointments(action) {
+  console.log("action", action.payload);
+  try {
+    const res = yield call(appointmentService.getAppointments, action.payload);
+    if (res.error) {
+      yield put({
+        type: AuthTypes.APPOINTMENT_ERROR,
+        error: res.message,
+      });
+    } else {
+      yield put({ type: AuthTypes.APPOINTMENT_SUCCESS, data: res });
+    }
+  } catch (error) {
+    yield put({ type: AuthTypes.APPOINTMENT_ERROR, error });
+  }
+}
+
+export function* getCurrentAppointments(action) {
+  console.log("action", action.payload);
+  try {
+    const res = yield call(currentAppointmentService.getCurrentAppointments, action.payload);
+    if (res.error) {
+      yield put({
+        type: AuthTypes.CURRENTAPPOINTMENT_ERROR,
+        error: res.message,
+      });
+    } else {
+      yield put({ type: AuthTypes.CURRENTAPPOINTMENT_SUCCESS, data: res });
+    }
+  } catch (error) {
+    yield put({ type: AuthTypes.CURRENTAPPOINTMENT_ERROR, error });
+  }
+}
+
 export default function* allSaga() {
   yield all([
     //Vehicle
     takeLatest(AuthTypes.SIGNUP_REQUEST, signup),
     takeLatest(AuthTypes.LOGIN_REQUEST, login),
     takeLatest(AuthTypes.SIGNOUT_REQUEST, signout),
+    takeLatest(AuthTypes.APPOINTMENT_REQUEST, getAppointments),
+    takeLatest(AuthTypes.CURRENTAPPOINTMENT_REQUEST, getCurrentAppointments)
   ]);
 }

@@ -1,10 +1,13 @@
-import { persistStore } from 'redux-persist';
+import { persistReducer, persistStore } from 'redux-persist';
+
+import ReduxPersist from '../config/reduxPersist.config';
 import configureStore from './configureStore';
 import reducers from './reducers';
 import rootSaga from './sagas';
 
 // Redux Persist
-const finalReducers = reducers;
+const persistConfig = ReduxPersist.storeConfig;
+const finalReducers = persistReducer(persistConfig, reducers);
 
 const { store } = configureStore(finalReducers, rootSaga);
 
