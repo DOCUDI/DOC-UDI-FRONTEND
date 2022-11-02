@@ -14,6 +14,7 @@ import CityDropdown from "./CityDropdown";
 import Slot from "./Slot";
 import { useDispatch } from "react-redux";
 import { signup } from "../../../redux/actions/signup.action";
+import { SlotBox } from "./Slot";
 
 const SignUpForm = () => {
   const theme = useTheme();
@@ -201,6 +202,38 @@ const SignUpForm = () => {
             </CardBox>
           </FormGroup>
         </Helper>
+        {timeslots.length !== 0 ? (
+          <Helper>
+            <FormGroup
+              sx={{
+                width: "100%",
+              }}
+            >
+              <label>Selected Time Slots</label>
+              <CardBox>
+                {timeslots.map((timeslot) => (
+                  <SlotBox key={timeslot._id}>
+                    <span
+                      style={{
+                        fontSize: "1rem",
+                      }}
+                    >
+                      {timeslot.startTime}
+                    </span>
+                    &nbsp;-&nbsp;
+                    <span
+                      style={{
+                        fontSize: "1rem",
+                      }}
+                    >
+                      {timeslot.endTime}
+                    </span>
+                  </SlotBox>
+                ))}
+              </CardBox>
+            </FormGroup>
+          </Helper>
+        ) : <></>}
         <Button variant="contained" style={style} onClick={submitHandler}>
           Sign Up
         </Button>

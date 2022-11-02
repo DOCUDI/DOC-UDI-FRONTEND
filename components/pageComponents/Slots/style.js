@@ -18,7 +18,6 @@ export const SlotsBoxContainer = styled.div`
   align-items: flex-start;
   justify-content: flex-start;
   padding-top: 3rem;
-
 `;
 
 export const CardBox = styled.div`
@@ -27,29 +26,6 @@ export const CardBox = styled.div`
   flex-wrap: wrap;
   align-items: center;
   justify-content: flex-start;
-`;
-
-export const SlotBox = styled.div`
-  width: 25%;
-  height: 5vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 1rem;
-  border-radius: 0.5rem;
-  background-color: #B7D0FF;
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  &:hover {
-    background-color: 
-    #5893FF;
-  }
-  &:active {
-    background-color: 
-    #5893FF;
-  }
-
 `;
 
 export const Content = styled.h2``;

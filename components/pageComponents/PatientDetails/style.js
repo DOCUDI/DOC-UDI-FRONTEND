@@ -89,6 +89,16 @@ export const CardBox = styled.div`
   justify-content: flex-start;
 `;
 
+export const NoUpcoming = styled.h2`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 2rem;
+  height: 100vh;
+  width: 100%;
+`;
+
 export const Card = styled.div`
   width: 25%;
   height: fit-content;

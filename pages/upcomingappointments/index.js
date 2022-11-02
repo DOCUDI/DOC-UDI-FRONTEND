@@ -7,6 +7,7 @@ import {
   LargeContent,
   TopBar,
   CardBox,
+  NoUpcoming,
 } from "../../components/pageComponents/PatientDetails/style";
 import { useTheme } from "@mui/material/styles";
 import Helmet from "../../components/utils/Header/Helmet";
@@ -17,11 +18,12 @@ import PreviousPatientCard from "../../components/pageComponents/upcomingappoint
 import { useSelector } from "react-redux";
 
 const UpcomingAppointments = () => {
-  
   const upcomingAppointments = useSelector(
     (state) => state.getAppointment.upAppointments
   );
-  
+  const hasAppointment = upcomingAppointments?.length > 0 ? true : false;
+  // console.log("up",upcomingAppointments)
+
   const theme = useTheme();
   const style = [
     {
@@ -59,18 +61,25 @@ const UpcomingAppointments = () => {
           </Link>
         </TopBar>
 
-        <CardBox>
-          {upcomingAppointments.map((item, index) => (
-            <PreviousPatientCard
-              id={item.id}
-              key={index}
-              patientName={item.patientName}
-              date={item.date}
-              time={item.time_slot}
-              symptoms={item.symptoms}
-            />
-          ))}
-        </CardBox>
+        {hasAppointment && (
+          <CardBox>
+            {upcomingAppointments?.map((item, index) => (
+              <PreviousPatientCard
+                id={item.id}
+                key={index}
+                patientName={item.patientName}
+                date={item.date}
+                time={item.time_slot}
+                symptoms={item.symptoms}
+              />
+            ))}
+          </CardBox>
+        )}
+        {!hasAppointment && (
+          <NoUpcoming>
+            Seems like you dont Upcoming Appointments
+          </NoUpcoming>
+        )}
       </PageContainer>
     </Container>
   );
