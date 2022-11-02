@@ -1,6 +1,6 @@
 import { Button } from "@material-ui/core";
 import { useTheme } from "@mui/material/styles";
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Container,
   Content,
@@ -11,6 +11,8 @@ import Helmet from "../../components/utils/Header/Helmet";
 import QR from "../../components/utils/Images/QR";
 import { IoIosArrowBack } from "react-icons/io";
 import Link from "next/link";
+import { useDispatch, useSelector } from "react-redux";
+import { currentAppointment } from "../../redux/actions/currentAppointment.action";
 
 const QRCode = () => {
   const theme = useTheme();
@@ -22,13 +24,29 @@ const QRCode = () => {
     boxShadow: "none",
     color: theme.palette.secondary.main,
   };
+  const dispatch = useDispatch();
+  const id = useSelector((state) => state.login.user._id);
+  const success = useSelector((state) => state.currentAppointment.success);
+  console.log("successsss", success);
+
+  useEffect(() => {
+    function getCurrentAppointment() {
+      dispatch(currentAppointment(id));
+    }
+    getCurrentAppointment();
+    const interval = setInterval(() => getCurrentAppointment(), 1000);
+    return () => {
+      clearInterval(interval);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Container>
       <Helmet />
       <QRBoxContainer>
         <QRBox borderColor={theme.palette.secondary.main}>
-          <Link href={'/'}>
+          <Link href={"/"}>
             <Button
               variant="contained"
               startIcon={<IoIosArrowBack />}

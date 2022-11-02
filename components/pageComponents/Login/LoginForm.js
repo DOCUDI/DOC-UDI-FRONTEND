@@ -1,7 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState } from "react";
-// import { useSession, signIn } from "next-auth/react";
-import { useSelector } from "react-redux";
 import { Button, Container, FormControl, OutlinedInput } from "@mui/material";
 import {
   // ButtonsContainer,
@@ -34,11 +32,6 @@ const LoginForm = () => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
-  const loginEmail = useSelector((state) => state.signup.email); // for google auth
-  const loginPassword = useSelector((state) => state.signup.usedPassword); // for google auth
-
-  console.log(loginEmail, loginPassword)
-
   const dispatch = useDispatch();
   const router = useRouter();
   // const { data: session } = useSession();
@@ -52,7 +45,6 @@ const LoginForm = () => {
     dispatch(login(data));
     router.push("/");
   };
-  // console.log(session)
 
   // if (session && session.user.email === loginEmail) {
   //   const data = {

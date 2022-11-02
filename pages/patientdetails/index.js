@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react/no-unescaped-entities */
-import React from "react";
+import React, { useState } from "react";
 import {
   CardBox,
   Container,
@@ -16,14 +17,28 @@ import Button from "@mui/material/Button";
 import Avatar from "@mui/material/Avatar";
 import { useTheme } from "@mui/material/styles";
 import Helmet from "../../components/utils/Header/Helmet";
-import { patientData } from "../../components/utils/data/patientData";
+// import { patientData } from "../../components/utils/data/patientData";
+import { uploadPrescription } from "../../redux/actions/uploadprescription.action";
 import PatientCard from "../../components/pageComponents/PatientDetails/PatientCard";
 import { IoIosArrowBack } from "react-icons/io";
 import Link from "next/link";
+import { useDispatch, useSelector } from "react-redux";
 
 const index = () => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const theme = useTheme();
+  const data = useSelector(
+    (state) => state.currentAppointment.currentAppointment[0]
+  );
+  // console.log("normal",data);
+  const history = useSelector(
+    (state) => state.currentAppointment.medicalHistory
+  );
+  const docData = useSelector((state) => state.login.user);
+  // console.log("doc",docData)
+
+  const hasSymptoms = data.symptoms.length > 0 ? true : false;
+  const hasHistory = history.length > 0 ? true : false;
+
   const style = [
     {
       backgroundColor: theme.palette.secondary.main,
@@ -41,6 +56,26 @@ const index = () => {
       boxShadow: "none",
     },
   ];
+
+  const [text, setText] = useState("");
+  const dispatch = useDispatch();
+  const submitHandler = () => {
+    const res = {
+      docID: docData._id,
+      patientID: data.patientID,
+      docName: docData.name,
+      specialization: docData.specialization,
+      clinicAddress: docData.clinic_address,
+      patientName: data.patientName,
+      date: data.date,
+      time: data.time_slot,
+      fees: docData.consultation_fee,
+      prescription: text,
+    };
+
+    dispatch(uploadPrescription(res));
+  };
+
   return (
     <Container>
       <Helmet />
@@ -65,47 +100,63 @@ const index = () => {
           />
           <SmallContent>
             <Span color={theme.palette.secondary.main}>Name :</Span>{" "}
-            {patientData.name}
+            {data.patientName}
           </SmallContent>
           <SmallContent>
+            <Span color={theme.palette.secondary.main}>Slot :</Span>{" "}
+            {data.time_slot.startTime}&nbsp;-&nbsp;{data.time_slot.endTime}
+          </SmallContent>
+          {/* <SmallContent>
             <Span color={theme.palette.secondary.main}>Age :</Span>{" "}
-            {patientData.age}
-          </SmallContent>
-          <SmallContent>
-            <Span color={theme.palette.secondary.main}>Symptoms :</Span>{" "}
-          </SmallContent>
-          <SmallContent>&nbsp;&nbsp;&nbsp;{patientData.symptoms}</SmallContent>
+            {}
+          </SmallContent> */}
+          {hasSymptoms && (
+            <>
+              <SmallContent>
+                <Span color={theme.palette.secondary.main}>Symptoms :</Span>{" "}
+              </SmallContent>
+              <SmallContent>&nbsp;&nbsp;&nbsp;{data.symptoms}</SmallContent>
+            </>
+          )}
           <SmallContent>
             <Span color={theme.palette.secondary.main}>Prescription :</Span>{" "}
           </SmallContent>
           <TextBox
             placeholder="Write Prescription"
             color={theme.palette.secondary.main}
+            onChange={(newValue) => setText(newValue.target.value)}
+            value={text}
           ></TextBox>
           <Link href={"/confirmation"}>
-            <Button variant="contained" style={style[0]}>
+            <Button
+              variant="contained"
+              style={style[0]}
+              onClick={submitHandler}
+            >
               Upload Prescription
             </Button>
           </Link>
         </HeaderBox>
       </DetailsBox>
-      <PatientHistoryBox>
-        <LargeContent>Patient's Medical History : </LargeContent>
-        <CardBox>
-          {patientData.history.map((item, index) => (
-            <PatientCard
-              key={index}
-              doctorName={item.doctorName}
-              doctorSpecialization={item.doctorSpecialization}
-              doctorAddress={item.doctorAddress}
-              date={item.date}
-              time={item.time}
-              symptoms={item.symptoms}
-              prescription={item.prescription}
-            />
-          ))}
-        </CardBox>
-      </PatientHistoryBox>
+      {hasHistory && (
+        <PatientHistoryBox>
+          <LargeContent>Patient's Medical History : </LargeContent>
+          <CardBox>
+            {history.map((item, index) => (
+              <PatientCard
+                key={index}
+                docName={item.docName}
+                specialization={item.specialization}
+                clinicAddress={item.clinicAddress}
+                date={item.date}
+                time={item.time}
+                symptoms={item.symptoms}
+                prescription={item.prescription}
+              />
+            ))}
+          </CardBox>
+        </PatientHistoryBox>
+      )}
     </Container>
   );
 };

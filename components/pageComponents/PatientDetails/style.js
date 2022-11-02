@@ -100,7 +100,7 @@ export const NoUpcoming = styled.h2`
 `;
 
 export const Card = styled.div`
-  width: 25%;
+  width: fit-content;
   height: fit-content;
   margin: 0.5rem 0.7rem;
   padding: 1rem;

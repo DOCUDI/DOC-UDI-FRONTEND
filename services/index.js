@@ -4,3 +4,4 @@ export { default as LoginService } from "./Login.service";
 export { default as SignoutService } from "./Signout.service";
 export { default as AppointmentService } from "./Appointment.service";
 export { default as CurrentAppointmentService } from "./currentAppointment.service";
+export { default as UploadPrescriptionService } from "./uploadPrescription.service";

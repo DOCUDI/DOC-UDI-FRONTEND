@@ -14,7 +14,6 @@ import Avatar from "@mui/material/Avatar";
 const PreviousPatientCard = (props) => {
   const theme = useTheme();
   const dt = new Date(props.date);
-  console.log(props.symptoms)
   const showSymptoms = props.symptoms.length > 0 ? true : false;
   return (
     <Card>

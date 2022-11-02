@@ -36,9 +36,6 @@ const Helmet = () => {
       email,
       token,
     };
-    // // eslint-disable-next-line react-hooks/rules-of-hooks
-    // // console.log(timeslots) 
-    // console.log("data",data);
     dispatch(signout(data));
     if (success) router.push("/");
   };

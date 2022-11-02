@@ -25,25 +25,25 @@ const PreviousPatientCard = (props) => {
           sx={{ height: 80, width: 80 }}
         />
         <CardName>
-          <SmallContentHeader>{props.doctorName}</SmallContentHeader>
+          <SmallContentHeader>Dr. {props.docName}</SmallContentHeader>
           <SmallContent>
-            {props.doctorSpecialization}
+            {props.specialization}
           </SmallContent>
-          <SmallContent>
-            {props.doctorAddress}
-          </SmallContent>
+          {/* <SmallContent>
+            {props.clinicAddress}
+          </SmallContent> */}
         </CardName>
       </CardHeader>
       <SmallContent>
         <Span color={theme.palette.secondary.main}>Date :</Span> {props.date}
       </SmallContent>
       <SmallContent>
-        <Span color={theme.palette.secondary.main}>Time :</Span> {props.time}
+        <Span color={theme.palette.secondary.main}>Time :</Span> {props.time.startTime}&nbsp;-&nbsp;{props.time.endTime}
       </SmallContent>
-      <SmallContent>
+      {/* <SmallContent>
         <Span color={theme.palette.secondary.main}>Symptoms :</Span>{" "}
         {props.symptoms}
-      </SmallContent>
+      </SmallContent> */}
       <SmallContent>
         <Span color={theme.palette.secondary.main}>Prescriptions :</Span>{" "}
         {props.prescription}

@@ -7,7 +7,7 @@ const REDUX_PERSIST = {
     key: 'primary',
     storage: storage,
     blacklist: [], // Add the reducers that you don't wanna persist.
-    whitelist: ['login'], // Add the reducers which you wanna persist, for eg., AuthReducer
+    whitelist: ['login', 'currentAppointment'], // Add the reducers which you wanna persist, for eg., AuthReducer
   },
 };
 

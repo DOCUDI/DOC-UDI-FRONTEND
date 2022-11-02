@@ -1,5 +1,12 @@
 import { put, call, takeLatest, all } from "redux-saga/effects";
-import { SignupService, LoginService, SignoutService, AppointmentService, CurrentAppointmentService } from "../../services";
+import {
+  SignupService,
+  LoginService,
+  SignoutService,
+  AppointmentService,
+  CurrentAppointmentService,
+  UploadPrescriptionService,
+} from "../../services";
 // import { Login } from '../../services/auth.service';
 import { AuthTypes } from "../types";
 
@@ -8,9 +15,10 @@ const loginService = new LoginService();
 const signoutService = new SignoutService();
 const appointmentService = new AppointmentService();
 const currentAppointmentService = new CurrentAppointmentService();
+const uploadPrescriptionService = new UploadPrescriptionService();
 //Vehicle Sagas
 export function* signup(action) {
-  console.log("in signup");
+  // console.log("in signup");
   try {
     const res = yield call(signupService.signup, action.payload);
     if (res.error) {
@@ -41,7 +49,7 @@ export function* login(action) {
   }
 }
 export function* signout(action) {
-  console.log("action", action.payload);
+  // console.log("action", action.payload);
   try {
     const res = yield call(signoutService.signout, action.payload);
     if (res.error) {
@@ -58,7 +66,7 @@ export function* signout(action) {
 }
 
 export function* getAppointments(action) {
-  console.log("action", action.payload);
+  // console.log("action", action.payload);
   try {
     const res = yield call(appointmentService.getAppointments, action.payload);
     if (res.error) {
@@ -74,10 +82,13 @@ export function* getAppointments(action) {
   }
 }
 
-export function* getCurrentAppointments(action) {
-  console.log("action", action.payload);
+export function* getCurrentAppointment(action) {
+  // console.log("action", action.payload);
   try {
-    const res = yield call(currentAppointmentService.getCurrentAppointments, action.payload);
+    const res = yield call(
+      currentAppointmentService.getCurrentAppointments,
+      action.payload
+    );
     if (res.error) {
       yield put({
         type: AuthTypes.CURRENTAPPOINTMENT_ERROR,
@@ -91,6 +102,26 @@ export function* getCurrentAppointments(action) {
   }
 }
 
+export function* uploadPrescription(action) {
+  // console.log("action", action.payload);
+  try {
+    const res = yield call(
+      uploadPrescriptionService.uploadPrescription,
+      action.payload
+    );
+    if (res.error) {
+      yield put({
+        type: AuthTypes.CURRENTAPPOINTMENT_ERROR,
+        error: res.message,
+      });
+    } else {
+      yield put({ type: AuthTypes.UPLOADPRESCRIPTION_SUCCESS, data: res });
+    }
+  } catch (error) {
+    yield put({ type: AuthTypes.UPLOADPRESCRIPTION_ERROR, error });
+  }
+}
+
 export default function* allSaga() {
   yield all([
     //Vehicle
@@ -98,6 +129,7 @@ export default function* allSaga() {
     takeLatest(AuthTypes.LOGIN_REQUEST, login),
     takeLatest(AuthTypes.SIGNOUT_REQUEST, signout),
     takeLatest(AuthTypes.APPOINTMENT_REQUEST, getAppointments),
-    takeLatest(AuthTypes.CURRENTAPPOINTMENT_REQUEST, getCurrentAppointments)
+    takeLatest(AuthTypes.CURRENTAPPOINTMENT_REQUEST, getCurrentAppointment),
+    takeLatest(AuthTypes.UPLOADPRESCRIPTION_REQUEST, uploadPrescription),
   ]);
 }

@@ -6,17 +6,17 @@ const initialState = {
   medicalHistory: [],
 };
 
-const CurrentAppointmentReducer = (state = initialState, action) => {
+const UploadPrescriptionReducer = (state = initialState, action) => {
   // console.log(action);
   switch (action.type) {
-  case AuthTypes.CURRENTAPPOINTMENT_SUCCESS:
+  case AuthTypes.UPLOADPRESCRIPTION_SUCCESS:
     return {
       ...state,
       success: action.data.success,
       currentAppointment: action.data.currentAppointment,
       medicalHistory: action.data.medicalHistory,
     };
-  case AuthTypes.CURRENTAPPOINTMENT_ERROR:
+  case AuthTypes.UPLOADPRESCRIPTION_ERROR:
     return {
       ...state,
     };
@@ -25,4 +25,4 @@ const CurrentAppointmentReducer = (state = initialState, action) => {
   }
 };
 
-export default CurrentAppointmentReducer;
+export default UploadPrescriptionReducer;

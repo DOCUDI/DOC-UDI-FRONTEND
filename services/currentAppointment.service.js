@@ -4,19 +4,27 @@ import { BASE_API_URL } from "./constants";
 
 class AuthService {
   async getCurrentAppointments(item) {
-    console.log("current appointment", item)
+    // console.log("item", item);
     const config = {
       headers: {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
-        "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token"
-      }
+        "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token",
+      },
+    };
+    const data = {
+      docID: item,
     };
     try {
-      const response = await Axios.post(`${BASE_API_URL}/doc/start-appointments`, item, config);
+      const response = await Axios.post(
+        `${BASE_API_URL}/doc/start-appointment`,
+        data,
+        config
+      );
+      // console.log("res", response.data);
       return response.data;
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       throw error;
     }
   }
