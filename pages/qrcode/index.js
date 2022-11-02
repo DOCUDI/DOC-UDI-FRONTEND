@@ -13,6 +13,7 @@ import { IoIosArrowBack } from "react-icons/io";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { currentAppointment } from "../../redux/actions/currentAppointment.action";
+import { useRouter } from "next/router";
 
 const QRCode = () => {
   const theme = useTheme();
@@ -26,11 +27,16 @@ const QRCode = () => {
   };
   const dispatch = useDispatch();
   const id = useSelector((state) => state.login.user._id);
-  // const success = useSelector((state) => state.currentAppointment.success);
+  const success = useSelector((state) => state.currentAppointment.currentAppointment);
+  const router = useRouter();
 
+  // useEffect(() => {
+  //   window.location.reload(false);
+  // }, [success])
   useEffect(() => {
     function getCurrentAppointment() {
       dispatch(currentAppointment(id));
+      if (success.length > 0) router.push("/patientdetails");
     }
     getCurrentAppointment();
     const interval = setInterval(() => getCurrentAppointment(), 1000);
@@ -38,7 +44,7 @@ const QRCode = () => {
       clearInterval(interval);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [success]);
 
   return (
     <Container>
