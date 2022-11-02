@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Button from "@mui/material/Button";
 import {
   ButtonGroup,
@@ -25,6 +25,11 @@ const Landing = () => {
     height: "4rem",
     width: "90%",
   };
+  const isSuccess = useSelector((state) => state.currentAppointment.success);
+  // console.log(isSuccess)
+  useEffect(() => {
+    if(isSuccess) window.location.reload();
+  }, [])
   return (
     <Container>
       <ContentContainer>

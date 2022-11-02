@@ -30,16 +30,13 @@ const QRCode = () => {
   const success = useSelector((state) => state.currentAppointment.currentAppointment);
   const router = useRouter();
 
-  // useEffect(() => {
-  //   window.location.reload(false);
-  // }, [success])
   useEffect(() => {
     function getCurrentAppointment() {
       dispatch(currentAppointment(id));
-      if (success.length > 0) router.push("/patientdetails");
+      if (success?.length > 0) router.push("/patientdetails");
     }
     getCurrentAppointment();
-    const interval = setInterval(() => getCurrentAppointment(), 1000);
+    const interval = setInterval(() => getCurrentAppointment(), 5000);
     return () => {
       clearInterval(interval);
     };
