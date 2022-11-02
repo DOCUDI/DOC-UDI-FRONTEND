@@ -1,19 +1,22 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState } from "react";
+// import { useSession, signIn } from "next-auth/react";
+import { useSelector } from "react-redux";
 import { Button, Container, FormControl, OutlinedInput } from "@mui/material";
 import {
-  ButtonsContainer,
+  // ButtonsContainer,
   Helper,
-  HelperInner,
+  // HelperInner,
   LargeText,
   SmallText,
 } from "./style";
 import { useTheme } from "@mui/material/styles";
-import { Divider } from "@mui/material";
-import { FcGoogle } from "react-icons/fc";
-import { FaFacebook } from "react-icons/fa";
+// import { Divider } from "@mui/material";
+// import { FcGoogle } from "react-icons/fc";
+// import { FaFacebook } from "react-icons/fa";
 import { login } from "../../../redux/actions/login.action";
 import { useDispatch } from "react-redux";
+import { useRouter } from "next/router";
 
 const LoginForm = () => {
   const theme = useTheme();
@@ -31,8 +34,14 @@ const LoginForm = () => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
+  const loginEmail = useSelector((state) => state.signup.email); // for google auth
+  const loginPassword = useSelector((state) => state.signup.usedPassword); // for google auth
+
+  console.log(loginEmail, loginPassword)
+
   const dispatch = useDispatch();
   const router = useRouter();
+  // const { data: session } = useSession();
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -40,17 +49,22 @@ const LoginForm = () => {
       email,
       password,
     };
-    // // eslint-disable-next-line react-hooks/rules-of-hooks
-    // // console.log(timeslots)
     dispatch(login(data));
     router.push("/");
-    // localStorage.setItem(
-    //   "token",
-    //   JSON.stringify({
-    //     email: data.email,
-    //     password: data.password,
-    //   }));
   };
+  // console.log(session)
+
+  // if (session && session.user.email === loginEmail) {
+  //   const data = {
+  //     email: session.user.email,
+  //     loginPassword,
+  //   };
+  //   dispatch(login(data));
+  //   // router.push("/");
+  // }
+  // else if(session && session.user.email !== loginEmail) {
+  //   router.push("/Login");
+  // }
 
   return (
     <Container
@@ -100,7 +114,7 @@ const LoginForm = () => {
           Login
         </Button>
 
-        <HelperInner>
+        {/* <HelperInner>
           <Divider
             sx={{
               width: "45%",
@@ -112,8 +126,8 @@ const LoginForm = () => {
               width: "45%",
             }}
           />
-        </HelperInner>
-        <ButtonsContainer>
+        </HelperInner> */}
+        {/* <ButtonsContainer>
           <Button
             variant="outlined"
             startIcon={<FcGoogle />}
@@ -121,6 +135,7 @@ const LoginForm = () => {
               border: "1px solid #5893FF",
               color: "#5893FF",
             }}
+            onClick={() => signIn()}
           >
             Google
           </Button>
@@ -134,7 +149,7 @@ const LoginForm = () => {
           >
             Facebook
           </Button>
-        </ButtonsContainer>
+        </ButtonsContainer> */}
       </FormControl>
     </Container>
   );

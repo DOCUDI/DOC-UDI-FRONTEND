@@ -11,7 +11,8 @@ const initialState = {
   time_slots: [],
   consultation_fee: "",
   working_days: [],
-  success: false
+  success: false,
+  usedPassword : ""
 };
 
 const SignupReducer = (state = initialState, action) => {
@@ -30,7 +31,8 @@ const SignupReducer = (state = initialState, action) => {
       time_slots: action.data.user.time_slots,
       consultation_fee: action.data.user.consultation_fee,
       working_days: action.data.user.working_days,
-      success: action.data.success
+      success: action.data.success,
+      usedPassword: action.data.password
     };
   case AuthTypes.SIGNUP_ERROR:
     return {

@@ -1,18 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState } from "react";
-import { Button, Container, FormControl, OutlinedInput } from "@mui/material";
 import {
-  ButtonsContainer,
-  Helper,
-  HelperInner,
-  LargeText,
-  SmallText,
-  CardBox,
-} from "./style";
+  Button,
+  Container,
+  FormControl,
+  FormGroup,
+  OutlinedInput,
+} from "@mui/material";
+import { useRouter } from "next/router";
+import { Helper, LargeText, SmallText, CardBox } from "./style";
 import { useTheme } from "@mui/material/styles";
-import { Divider } from "@mui/material";
-import { FcGoogle } from "react-icons/fc";
-import { FaFacebook } from "react-icons/fa";
 import CityDropdown from "./CityDropdown";
 import Slot from "./Slot";
 import { useDispatch } from "react-redux";
@@ -48,6 +45,7 @@ const SignUpForm = () => {
   const handleCity = (c) => {
     setCity(c);
   };
+  const router = useRouter();
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -62,6 +60,7 @@ const SignUpForm = () => {
       time_slots: timeslots,
     };
     dispatch(signup(data));
+    router.push("/Login");
   };
 
   return (
@@ -92,106 +91,119 @@ const SignUpForm = () => {
         }}
       >
         <Helper>
-          <label>Full Name</label>
-          <OutlinedInput
-            placeholder="Enter your name"
-            sx={{ border: "1px solid #5993ff", width: "100%", height: "5vh" }}
-            onChange={(e) => setName(e.target.value)}
-          />
+          <FormGroup
+            sx={{
+              width: "100%",
+            }}
+          >
+            <label>Full Name</label>
+            <OutlinedInput
+              placeholder="Enter your name"
+              sx={{ border: "1px solid #5993ff", width: "100%", height: "5vh" }}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </FormGroup>
         </Helper>
         <Helper>
-          <label>E-mail</label>
-          <OutlinedInput
-            placeholder="Enter your email"
-            sx={{ border: "1px solid #5993ff", width: "100%", height: "5vh" }}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+          <FormGroup
+            sx={{
+              width: "100%",
+            }}
+          >
+            <label>E-mail</label>
+            <OutlinedInput
+              placeholder="Enter your email"
+              sx={{ border: "1px solid #5993ff", width: "100%", height: "5vh" }}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </FormGroup>
         </Helper>
         <Helper>
-          <label>Password</label>
-          <OutlinedInput
-            placeholder="Enter your password"
-            sx={{ border: "1px solid #5993ff", width: "100%", height: "5vh" }}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+          <FormGroup
+            sx={{
+              width: "100%",
+            }}
+          >
+            <label>Password</label>
+            <OutlinedInput
+              placeholder="Enter your password"
+              sx={{ border: "1px solid #5993ff", width: "100%", height: "5vh" }}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </FormGroup>
         </Helper>
         <Helper>
-          <label>Confirm Password</label>
-          <OutlinedInput
-            placeholder="Confirm password"
-            sx={{ border: "1px solid #5993ff", width: "100%", height: "5vh" }}
-            onChange={(e) => setSpecialization(e.target.value)}
-          />
+          <FormGroup
+            sx={{
+              width: "100%",
+            }}
+          >
+            <label>Confirm Password</label>
+            <OutlinedInput
+              placeholder="Confirm password"
+              sx={{ border: "1px solid #5993ff", width: "100%", height: "5vh" }}
+              onChange={(e) => setSpecialization(e.target.value)}
+            />
+          </FormGroup>
         </Helper>
         <Helper>
-          <label>Specialization</label>
-          <OutlinedInput
-            placeholder="Enter your specialization"
-            sx={{ border: "1px solid #5993ff", width: "100%", height: "5vh" }}
-            onChange={(e) => setSpecialization(e.target.value)}
-          />
+          <FormGroup
+            sx={{
+              width: "100%",
+            }}
+          >
+            <label>Specialization</label>
+            <OutlinedInput
+              placeholder="Enter your specialization"
+              sx={{ border: "1px solid #5993ff", width: "100%", height: "5vh" }}
+              onChange={(e) => setSpecialization(e.target.value)}
+            />
+          </FormGroup>
         </Helper>
         <Helper>
-          <label>Clinic Address</label>
-          <OutlinedInput
-            placeholder="Enter your address"
-            sx={{ border: "1px solid #5993ff", width: "100%", height: "5vh" }}
-            onChange={(e) => setAddress(e.target.value)}
-          />
+          <FormGroup
+            sx={{
+              width: "100%",
+            }}
+          >
+            <label>Clinic Address</label>
+            <OutlinedInput
+              placeholder="Enter your address"
+              sx={{ border: "1px solid #5993ff", width: "100%", height: "5vh" }}
+              onChange={(e) => setAddress(e.target.value)}
+            />
+          </FormGroup>
         </Helper>
         <CityDropdown onSelectCity={handleCity} />
         <Helper>
-          <label>Consultation Fee</label>
-          <OutlinedInput
-            placeholder="Enter an amount"
-            sx={{ border: "1px solid #5993ff", width: "100%", height: "5vh" }}
-            onChange={(e) => setConsultationfee(e.target.value)}
-          />
+          <FormGroup
+            sx={{
+              width: "100%",
+            }}
+          >
+            <label>Consultation Fee</label>
+            <OutlinedInput
+              placeholder="Enter an amount"
+              sx={{ border: "1px solid #5993ff", width: "100%", height: "5vh" }}
+              onChange={(e) => setConsultationfee(e.target.value)}
+            />
+          </FormGroup>
         </Helper>
         <Helper>
-          <label>Select Time Slots</label>
+          <FormGroup
+            sx={{
+              width: "100%",
+            }}
+          >
+            <label>Select Time Slots</label>
+            <CardBox>
+              <Slot onSelectSlot={handleSlot} />
+            </CardBox>
+          </FormGroup>
         </Helper>
-        <CardBox>
-          <Slot onSelectSlot={handleSlot} />
-        </CardBox>
         <Button variant="contained" style={style} onClick={submitHandler}>
           Sign Up
         </Button>
-        <HelperInner>
-          <Divider
-            sx={{
-              width: "45%",
-            }}
-          />
-          &nbsp;&nbsp;OR&nbsp;&nbsp;
-          <Divider
-            sx={{
-              width: "45%",
-            }}
-          />
-        </HelperInner>
-        <ButtonsContainer>
-          <Button
-            variant="outlined"
-            startIcon={<FcGoogle />}
-            sx={{
-              border: "1px solid #5893FF",
-              color: "#5893FF",
-            }}
-          >
-            Google
-          </Button>
-          <Button
-            variant="outlined"
-            startIcon={<FaFacebook color="#1877f2" />}
-            sx={{
-              border: "1px solid #5893FF",
-              color: "#5893FF",
-            }}
-          >
-            Facebook
-          </Button>
-        </ButtonsContainer>
       </FormControl>
     </Container>
   );

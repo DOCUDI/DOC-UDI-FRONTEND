@@ -10,11 +10,13 @@ import {
   SmallContent,
 } from "../../components/pageComponents/Landing/style";
 import { useTheme } from "@mui/material/styles";
+import { useSelector } from 'react-redux';
 import Doctor from "../../components/utils/Images/Doctor";
 import Link from "next/link";
 
 const Landing = () => {
   const theme = useTheme();
+  const name = useSelector((state) => state.login.user.name);
   const style = {
     backgroundColor: theme.palette.secondary.main,
     color: "white",
@@ -27,7 +29,7 @@ const Landing = () => {
     <Container>
       <ContentContainer>
         <Content>
-          <LargeContent>Hi, Paarth Jain</LargeContent>
+          <LargeContent>Hi, {name}</LargeContent>
           <SmallContent>We hope you are doing good</SmallContent>
         </Content>
         <ButtonGroup>
