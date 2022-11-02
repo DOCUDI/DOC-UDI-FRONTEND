@@ -7,7 +7,6 @@ import {
   LargeContent,
   TopBar,
   CardBox,
-  NoUpcoming,
 } from "../../components/pageComponents/PatientDetails/style";
 import { useTheme } from "@mui/material/styles";
 import Helmet from "../../components/utils/Header/Helmet";
@@ -49,7 +48,11 @@ const UpcomingAppointments = () => {
       <Helmet />
       <PageContainer>
         <TopBar>
-          <LargeContent>Upcoming Appointment</LargeContent>
+          {hasAppointment ? (
+            <LargeContent>Upcoming Appointments</LargeContent>
+          ) : (
+            <LargeContent>No Appointments</LargeContent>
+          )}
           <Link href={"/"}>
             <Button
               variant="contained"
@@ -74,11 +77,6 @@ const UpcomingAppointments = () => {
               />
             ))}
           </CardBox>
-        )}
-        {!hasAppointment && (
-          <NoUpcoming>
-            Seems like you dont Upcoming Appointments
-          </NoUpcoming>
         )}
       </PageContainer>
     </Container>

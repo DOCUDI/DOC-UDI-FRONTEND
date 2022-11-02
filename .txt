@@ -1,4 +1,3 @@
 profile page
 start appointment procedure
-sent prescription
-google and facebook auth
+link pages

@@ -26,8 +26,7 @@ const QRCode = () => {
   };
   const dispatch = useDispatch();
   const id = useSelector((state) => state.login.user._id);
-  const success = useSelector((state) => state.currentAppointment.success);
-  console.log("successsss", success);
+  // const success = useSelector((state) => state.currentAppointment.success);
 
   useEffect(() => {
     function getCurrentAppointment() {
