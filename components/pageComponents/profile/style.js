@@ -7,7 +7,7 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  padding: 0 6rem;
+  padding: 0 4rem;
   background-color: #f6f9fe;
 `;
 
@@ -21,7 +21,7 @@ export const ContentContainer = styled.div`
 `;
 
 export const InnerPicContainer = styled.div`
-  width: 7%;
+  width: 6.5%;
   height: 100%;
   border-radius: 50%;
   display: flex;
@@ -81,10 +81,64 @@ export const MainContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  // background-color: black;
+`;
+export const MainContainer2 = styled.div`
+  width: 50%;
+  height: 50vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
 `;
 export const BlueTile = styled.div`
-  width: 50%;
+  width: 80%;
+  height: 5vh;
+  background-color: #b7d0ff;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+  font-weight: 600;
+`;
+export const WhiteTile = styled.div`
+  width: 70%;
+  height: fit-content;
+  background-color: white;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.3rem 0.6rem;
+  font-weight: 400;
+`;
+export const HelperContainer = styled.div`
+  width: 70%;
+  height: fit-content;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+`;
+
+export const HelperContainer2 = styled.div`
+  width: 70%;
+  height: fit-content;
+  display: flex;
+  align-items: flex-start;
+  flex-direction:column;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+`;
+
+export const Help = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+`;
+
+export const BlueTile2 = styled.div`
+  width: 80%;
   height: 5vh;
   background-color: #b7d0ff;
   border-radius: 4px;
@@ -92,23 +146,18 @@ export const BlueTile = styled.div`
   align-items: center;
   justify-content: center;
   padding: 1rem;
-  margin-right: 1rem;
+  font-weight: 600;
+  margin-bottom:2rem;
 `;
-export const WhiteTile = styled.div`
-  width: 50%;
+export const WhiteTile2 = styled.div`
+  width: 80%;
   height: fit-content;
   background-color: white;
   border-radius: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0.5rem 1rem;
-`;
-export const HelperContainer = styled.div`
-  width: 70%;
-  height: 10vh;
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
+  padding: 0.3rem 0.6rem;
+  font-weight: 400;
   margin-bottom: 2rem;
 `;
