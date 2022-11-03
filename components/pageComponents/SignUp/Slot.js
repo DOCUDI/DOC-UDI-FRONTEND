@@ -9,7 +9,7 @@ export const SlotBox = styled.div`
   align-items: center;
   justify-content: center;
   margin: 1rem;
-  border-radius: 0.5rem;
+  border-radius: 0.2rem;
   background-color: #b7d0ff;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
   cursor: pointer;

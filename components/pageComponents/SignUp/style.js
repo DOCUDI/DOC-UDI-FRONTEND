@@ -17,6 +17,13 @@ export const SmallText = styled.p`
   margin-top: 1rem;
 `;
 
+export const RedParagraph = styled.p`
+  color: red;
+  font-size: 1rem;
+  padding: 0;
+  margin:0;
+`;
+
 export const LargeText = styled.p`
   font-size: 2rem;
   font-weight: 700;

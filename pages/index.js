@@ -5,24 +5,16 @@ import { Container } from "../components/pageComponents/global/style";
 import Helmet from "../components/utils/Header/Helmet";
 import Landing from "./Landing";
 import Login from "./Login";
-// import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import SignUp from "./SignUp";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-// import { useEffect } from "react";
-import { getAppointments } from "../redux/actions/upcomingappointments.action";
 
 export default function Home() {
   // let bool = false;
   const isSignedIn = useSelector((state) => state.signup.success);
   const isLoggedIn = useSelector((state) => state.login.success);
-  const dispatch = useDispatch();
-  const id = useSelector((state) => state.login.user._id);
+  // const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getAppointments({ id: id }));
-  }, [dispatch, id]);
+  // dispatch(getAppointments({ id: id }));
 
   return (
     <div>

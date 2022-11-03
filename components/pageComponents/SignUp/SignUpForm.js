@@ -8,7 +8,7 @@ import {
   OutlinedInput,
 } from "@mui/material";
 import { useRouter } from "next/router";
-import { Helper, LargeText, SmallText, CardBox } from "./style";
+import { Helper, LargeText, SmallText, CardBox, RedParagraph } from "./style";
 import { useTheme } from "@mui/material/styles";
 import CityDropdown from "./CityDropdown";
 import Slot from "./Slot";
@@ -33,12 +33,13 @@ const SignUpForm = () => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [specialization, setSpecialization] = useState();
-  // const [number, setNumber] = useState();
   const [address, setAddress] = useState();
   const [city, setCity] = useState();
   const [consultationfee, setConsultationfee] = useState();
   const [timeslots, setTimeslots] = useState([]);
   const dispatch = useDispatch();
+
+  const [empty, setEmpty] = useState(false);
 
   const handleSlot = (timeslts) => {
     setTimeslots((arr) => [...arr, timeslts]);
@@ -50,18 +51,32 @@ const SignUpForm = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    const data = {
-      name,
-      email,
-      password,
-      clinic_address: address,
-      specialization,
-      city,
-      consultation_fee: consultationfee,
-      time_slots: timeslots,
-    };
-    dispatch(signup(data));
-    router.push("/Login");
+    if (
+      name === undefined ||
+      email === undefined ||
+      password === undefined ||
+      specialization === undefined ||
+      address === undefined ||
+      city === undefined ||
+      consultationfee === undefined ||
+      timeslots.length === 0
+    ) {
+      setEmpty(true);
+    } else {
+      setEmpty(false);
+      const data = {
+        name,
+        email,
+        password,
+        clinic_address: address,
+        specialization,
+        city,
+        consultation_fee: consultationfee,
+        time_slots: timeslots,
+      };
+      dispatch(signup(data));
+      router.push("/Login");
+    }
   };
 
   return (
@@ -233,10 +248,13 @@ const SignUpForm = () => {
               </CardBox>
             </FormGroup>
           </Helper>
-        ) : <></>}
+        ) : (
+          <></>
+        )}
         <Button variant="contained" style={style} onClick={submitHandler}>
           Sign Up
         </Button>
+        {empty && <RedParagraph>*Fields cannot be empty</RedParagraph>}
       </FormControl>
     </Container>
   );

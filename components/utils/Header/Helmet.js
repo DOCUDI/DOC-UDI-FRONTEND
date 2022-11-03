@@ -21,9 +21,9 @@ const settings = ["Profile", "Dashboard", "Logout"];
 const Helmet = () => {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const dispatch = useDispatch();
-  const email = useSelector((state) => state.login.user.email);
-  const token = useSelector((state) => state.login.token);
-  const success = useSelector((state) => state.login.success);
+  const email = useSelector((state) => state.login.user?.email);
+  const token = useSelector((state) => state.login?.token);
+  const success = useSelector((state) => state.login?.success);
   const router = useRouter();
 
   const handleOpenUserMenu = (event) => {
@@ -37,7 +37,7 @@ const Helmet = () => {
       token,
     };
     dispatch(signout(data));
-    if (success) router.push("/");
+    if(success) router.push("/Login");
   };
 
   return (

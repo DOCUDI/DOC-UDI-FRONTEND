@@ -10,9 +10,10 @@ import {
   SmallContent,
 } from "../../components/pageComponents/Landing/style";
 import { useTheme } from "@mui/material/styles";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 import Doctor from "../../components/utils/Images/Doctor";
 import Link from "next/link";
+import { getAppointments } from "../../redux/actions/upcomingappointments.action";
 
 const Landing = () => {
   const theme = useTheme();
@@ -26,10 +27,15 @@ const Landing = () => {
     width: "90%",
   };
   const isSuccess = useSelector((state) => state.currentAppointment.success);
-  // console.log(isSuccess)
+  const dispatch = useDispatch();
+  const id = useSelector((state) => state.login.user._id)
+  const submitHandler = () => {
+    dispatch(getAppointments({ id: id }));
+  };
+
   useEffect(() => {
-    if(isSuccess) window.location.reload();
-  }, [])
+    if (isSuccess) window.location.reload();
+  }, []);
   return (
     <Container>
       <ContentContainer>
@@ -44,7 +50,7 @@ const Landing = () => {
             </Button>
           </Link>
           <Link href={"/upcomingappointments"}>
-            <Button variant="contained" style={style}>
+            <Button variant="contained" style={style} onClick={submitHandler}>
               Upcoming Appointments
             </Button>
           </Link>

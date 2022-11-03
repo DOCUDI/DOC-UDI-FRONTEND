@@ -1,20 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState } from "react";
 import { Button, Container, FormControl, OutlinedInput } from "@mui/material";
-import {
-  // ButtonsContainer,
-  Helper,
-  // HelperInner,
-  LargeText,
-  SmallText,
-} from "./style";
+import { Helper, LargeText, SmallText } from "./style";
 import { useTheme } from "@mui/material/styles";
-// import { Divider } from "@mui/material";
-// import { FcGoogle } from "react-icons/fc";
-// import { FaFacebook } from "react-icons/fa";
 import { login } from "../../../redux/actions/login.action";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
+import { RedParagraph } from "../SignUp/style";
 
 const LoginForm = () => {
   const theme = useTheme();
@@ -31,32 +23,24 @@ const LoginForm = () => {
 
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [empty, setEmpty] = useState(false);
 
   const dispatch = useDispatch();
   const router = useRouter();
-  // const { data: session } = useSession();
 
   const submitHandler = (e) => {
     e.preventDefault();
-    const data = {
-      email,
-      password,
-    };
-    dispatch(login(data));
-    router.push("/");
+    if (email === undefined || password === undefined) {
+      setEmpty(true);
+    } else {
+      const data = {
+        email,
+        password,
+      };
+      dispatch(login(data));
+      router.push("/");
+    }
   };
-
-  // if (session && session.user.email === loginEmail) {
-  //   const data = {
-  //     email: session.user.email,
-  //     loginPassword,
-  //   };
-  //   dispatch(login(data));
-  //   // router.push("/");
-  // }
-  // else if(session && session.user.email !== loginEmail) {
-  //   router.push("/Login");
-  // }
 
   return (
     <Container
@@ -101,47 +85,10 @@ const LoginForm = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </Helper>
-
         <Button variant="contained" style={style} onClick={submitHandler}>
           Login
         </Button>
-
-        {/* <HelperInner>
-          <Divider
-            sx={{
-              width: "45%",
-            }}
-          />
-          &nbsp;&nbsp;OR&nbsp;&nbsp;
-          <Divider
-            sx={{
-              width: "45%",
-            }}
-          />
-        </HelperInner> */}
-        {/* <ButtonsContainer>
-          <Button
-            variant="outlined"
-            startIcon={<FcGoogle />}
-            sx={{
-              border: "1px solid #5893FF",
-              color: "#5893FF",
-            }}
-            onClick={() => signIn()}
-          >
-            Google
-          </Button>
-          <Button
-            variant="outlined"
-            startIcon={<FaFacebook color="#1877f2" />}
-            sx={{
-              border: "1px solid #5893FF",
-              color: "#5893FF",
-            }}
-          >
-            Facebook
-          </Button>
-        </ButtonsContainer> */}
+        {empty && <RedParagraph>* Fields cannot be empty</RedParagraph>}
       </FormControl>
     </Container>
   );
