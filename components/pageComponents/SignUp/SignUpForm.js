@@ -7,6 +7,7 @@ import {
   FormGroup,
   OutlinedInput,
 } from "@mui/material";
+import Axios from "axios";
 import { useRouter } from "next/router";
 import { Helper, LargeText, SmallText, CardBox, RedParagraph } from "./style";
 import { useTheme } from "@mui/material/styles";
@@ -15,19 +16,32 @@ import Slot from "./Slot";
 import { useDispatch } from "react-redux";
 import { signup } from "../../../redux/actions/signup.action";
 import { SlotBox } from "./Slot";
+import Working from "./Working";
 
 const SignUpForm = () => {
   const theme = useTheme();
-  const style = {
-    backgroundColor: theme.palette.secondary.main,
-    color: "white",
-    fontSize: "1.2rem",
-    fontWeight: "400",
-    width: "100%",
-    marginTop: "2rem",
-    alignSelf: "center",
-    marginBottom: "1rem",
-  };
+  const style = [
+    {
+      backgroundColor: theme.palette.secondary.main,
+      color: "white",
+      fontSize: "1.2rem",
+      fontWeight: "400",
+      width: "100%",
+      marginTop: "2rem",
+      alignSelf: "center",
+      marginBottom: "1rem",
+    },
+    {
+      backgroundColor: theme.palette.secondary.main,
+      color: "white",
+      fontSize: "1.2rem",
+      fontWeight: "400",
+      width: "50%",
+      marginTop: "2rem",
+      alignSelf: "center",
+      marginBottom: "1rem",
+    },
+  ];
 
   const [name, setName] = useState();
   const [email, setEmail] = useState();
@@ -37,12 +51,18 @@ const SignUpForm = () => {
   const [city, setCity] = useState();
   const [consultationfee, setConsultationfee] = useState();
   const [timeslots, setTimeslots] = useState([]);
+  const [workingDays, setWorkingDays] = useState([]);
+  const [imageSelected, setImageSelected] = useState("");
+  const [image, setImage] = useState("");
   const dispatch = useDispatch();
 
   const [empty, setEmpty] = useState(false);
 
   const handleSlot = (timeslts) => {
     setTimeslots((arr) => [...arr, timeslts]);
+  };
+  const handleDay = (day) => {
+    setWorkingDays((working) => [...working, day.day]);
   };
   const handleCity = (c) => {
     setCity(c);
@@ -59,7 +79,8 @@ const SignUpForm = () => {
       address === undefined ||
       city === undefined ||
       consultationfee === undefined ||
-      timeslots.length === 0
+      timeslots.length === 0 ||
+      imageSelected.length === 0
     ) {
       setEmpty(true);
     } else {
@@ -73,10 +94,26 @@ const SignUpForm = () => {
         city,
         consultation_fee: consultationfee,
         time_slots: timeslots,
+        working_days: workingDays,
+        pfp: imageSelected
       };
       dispatch(signup(data));
       router.push("/Login");
     }
+    console.log(imageSelected);
+  };
+
+  const uploadingImage = () => {
+    const formData = new FormData();
+    formData.append("file", image);
+    formData.append("upload_preset", "doctor");
+    Axios.post(
+      "https://api.cloudinary.com/v1_1/dcogm6vx9/image/upload",
+      formData
+    ).then((res) => {
+      setImageSelected(res.data.url);
+      console.log(image);
+    });
   };
 
   return (
@@ -206,6 +243,17 @@ const SignUpForm = () => {
           </FormGroup>
         </Helper>
         <Helper>
+          <Button variant="contained" style={style[1]}>
+            Pick an Image
+            <input type="file"  onChange={(e) => setImage(e.target.files[0])} />
+          </Button>
+        </Helper>
+        <Helper>
+          <Button variant="contained" style={style[1]} onClick={uploadingImage} >
+            Upload Image
+          </Button>
+        </Helper>
+        <Helper>
           <FormGroup
             sx={{
               width: "100%",
@@ -251,7 +299,46 @@ const SignUpForm = () => {
         ) : (
           <></>
         )}
-        <Button variant="contained" style={style} onClick={submitHandler}>
+
+        <Helper>
+          <FormGroup
+            sx={{
+              width: "100%",
+            }}
+          >
+            <label>Select Working Days</label>
+            <CardBox>
+              <Working onSelectDay={handleDay} />
+            </CardBox>
+          </FormGroup>
+        </Helper>
+        {workingDays.length !== 0 ? (
+          <Helper>
+            <FormGroup
+              sx={{
+                width: "100%",
+              }}
+            >
+              <label>Selected Working Days</label>
+              <CardBox>
+                {workingDays.map((d) => (
+                  <SlotBox key={Math.floor(Math.random() * 10)}>
+                    <span
+                      style={{
+                        fontSize: "1rem",
+                      }}
+                    >
+                      {d}
+                    </span>
+                  </SlotBox>
+                ))}
+              </CardBox>
+            </FormGroup>
+          </Helper>
+        ) : (
+          <></>
+        )}
+        <Button variant="contained" style={style[0]} onClick={submitHandler}>
           Sign Up
         </Button>
         {empty && <RedParagraph>*Fields cannot be empty</RedParagraph>}

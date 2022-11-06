@@ -20,6 +20,7 @@ const UpcomingAppointments = () => {
   const upcomingAppointments = useSelector(
     (state) => state.getAppointment.upAppointments
   );
+  console.log(upcomingAppointments)
   const hasAppointment = upcomingAppointments?.length > 0 ? true : false;
   // console.log("up",upcomingAppointments)
 
@@ -74,6 +75,7 @@ const UpcomingAppointments = () => {
                 date={item.date}
                 time={item.time_slot}
                 symptoms={item.symptoms}
+                img={item.patientPfp}
               />
             ))}
           </CardBox>

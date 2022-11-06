@@ -57,7 +57,7 @@ const QRCode = () => {
               back
             </Button>
           </Link>
-          <Content>Let the patient scan this QR</Content>
+          <Content>Let the patient scan this QR </Content>
           <QR />
         </QRBox>
       </QRBoxContainer>

@@ -20,7 +20,7 @@ const PreviousPatientCard = (props) => {
       <CardHeader>
         <Avatar
           alt="Remy Sharp"
-          src="/static/images/avatar/2.jpg"
+          src={props?.img}
           sx={{ height: 80, width: 80 }}
         />
         <CardName>

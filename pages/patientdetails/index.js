@@ -29,6 +29,7 @@ const index = () => {
   const data = useSelector(
     (state) => state.currentAppointment.currentAppointment[0]
   );
+  console.log(data);
   const history = useSelector(
     (state) => state.currentAppointment.medicalHistory
   );
@@ -56,22 +57,6 @@ const index = () => {
   ];
 
   const [text, setText] = useState("");
-  // const dispatch = useDispatch();
-  // const submitHandler = () => {
-  //   const res = {
-  //     docID: docData._id,
-  //     patientID: data.patientID,
-  //     docName: docData.name,
-  //     specialization: docData.specialization,
-  //     clinicAddress: docData.clinic_address,
-  //     patientName: data.patientName,
-  //     date: data.date,
-  //     time: data.time_slot,
-  //     fees: docData.consultation_fee,
-  //     prescription: text,
-  //   };
-  //   dispatch(uploadPrescription(res));
-  // };
 
   return (
     <Container>
@@ -92,7 +77,7 @@ const index = () => {
           </TopBar>
           <Avatar
             alt="Remy Sharp"
-            src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.collinsdictionary.com%2Fdictionary%2Fenglish%2Fsolo&psig=AOvVaw3aryi0YTqJq1rS3prXAvP6&ust=1664386287894000&source=images&cd=vfe&ved=0CAwQjRxqFwoTCMjVw6PAtfoCFQAAAAAdAAAAABAD"
+            src={data?.pfp}
             sx={{ height: 100, width: 100, marginBottom: "1rem" }}
           />
           <SmallContent>
@@ -130,10 +115,7 @@ const index = () => {
               query: { data: JSON.stringify(text) },
             }}
           >
-            <Button
-              variant="contained"
-              style={style[0]}
-            >
+            <Button variant="contained" style={style[0]}>
               Upload Prescription
             </Button>
           </Link>

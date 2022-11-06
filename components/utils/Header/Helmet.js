@@ -24,6 +24,7 @@ const Helmet = () => {
   const email = useSelector((state) => state.login.user?.email);
   const token = useSelector((state) => state.login?.token);
   const success = useSelector((state) => state.login?.success);
+  const docPfp = useSelector((state) => state.login.user.pfp);
   const router = useRouter();
 
   const handleOpenUserMenu = (event) => {
@@ -65,7 +66,7 @@ const Helmet = () => {
           >
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="Remy Sharp" src={docPfp} />
               </IconButton>
             </Tooltip>
             <Menu
