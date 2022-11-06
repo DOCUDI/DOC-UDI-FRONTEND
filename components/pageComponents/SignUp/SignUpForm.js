@@ -97,10 +97,11 @@ const SignUpForm = () => {
         working_days: workingDays,
         pfp: imageSelected
       };
+      console.log(data)
       dispatch(signup(data));
       router.push("/Login");
     }
-    console.log(imageSelected);
+    // console.log("iiiiiii",imageSelected);
   };
 
   const uploadingImage = () => {

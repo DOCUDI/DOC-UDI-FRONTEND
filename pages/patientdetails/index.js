@@ -77,7 +77,7 @@ const index = () => {
           </TopBar>
           <Avatar
             alt="Remy Sharp"
-            src={data?.pfp}
+            src={data?.patientPfp}
             sx={{ height: 100, width: 100, marginBottom: "1rem" }}
           />
           <SmallContent>

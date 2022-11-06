@@ -50,8 +50,9 @@ const Confirmation = () => {
   const data = useSelector(
     (state) => state.currentAppointment.currentAppointment[0]
   );
-  const patientPfp = useSelector((state) => state.login.user.patientPfp);
+  // const patientPfp = useSelector((state) => state.login.user.pfp);
   const docData = useSelector((state) => state.login.user);
+  console.log("hiiii",docData)
 
   const dispatch = useDispatch();
 
@@ -67,7 +68,7 @@ const Confirmation = () => {
       time: data?.time_slot,
       fees: docData?.consultation_fee,
       prescription: text,
-      patientPfp
+      docPfp:docData.pfp
     };
     setIsConfirm((isConfirm) => !isConfirm);
     dispatch(uploadPrescription(res));
@@ -99,7 +100,7 @@ const Confirmation = () => {
             </TopBar>
             <Avatar
               alt="Remy Sharp"
-              src={patientPfp}
+              src={data?.patientPfp}
               sx={{ height: 100, width: 100, marginBottom: "1rem" }}
             />
             <SmallContent>
