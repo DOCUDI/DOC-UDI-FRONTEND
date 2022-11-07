@@ -41,6 +41,16 @@ const SignUpForm = () => {
       alignSelf: "center",
       marginBottom: "1rem",
     },
+    {
+      backgroundColor: "rgba(255, 0, 0, 0.6)",
+      color: "white",
+      fontSize: "1.2rem",
+      fontWeight: "400",
+      width: "100%",
+      marginTop: "2rem",
+      alignSelf: "center",
+      marginBottom: "1rem",
+    },
   ];
 
   const [name, setName] = useState();
@@ -95,9 +105,9 @@ const SignUpForm = () => {
         consultation_fee: consultationfee,
         time_slots: timeslots,
         working_days: workingDays,
-        pfp: imageSelected
+        pfp: imageSelected,
       };
-      console.log(data)
+      console.log(data);
       dispatch(signup(data));
       router.push("/Login");
     }
@@ -245,14 +255,24 @@ const SignUpForm = () => {
         </Helper>
         <Helper>
           <Button variant="contained" style={style[1]}>
-            Pick an Image
-            <input type="file"  onChange={(e) => setImage(e.target.files[0])} />
+            <label htmlFor="files" className="btn">
+              Select Image
+            </label>
+            <input type="file" id="files" hidden onChange={(e) => setImage(e.target.files[0])} />
           </Button>
         </Helper>
         <Helper>
-          <Button variant="contained" style={style[1]} onClick={uploadingImage} >
-            Upload Image
-          </Button>
+          {image ? (
+            <Button
+              variant="contained"
+              style={style[2]}
+              onClick={uploadingImage}
+            >
+              Upload to cloud
+            </Button>
+          ) : (
+            <></>
+          )}
         </Helper>
         <Helper>
           <FormGroup
