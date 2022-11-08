@@ -36,7 +36,7 @@ const QRCode = () => {
       if (success?.length > 0) router.push("/patientdetails");
     }
     getCurrentAppointment();
-    const interval = setInterval(() => getCurrentAppointment(), 2000);
+    const interval = setInterval(() => getCurrentAppointment(), 5000);
     return () => {
       clearInterval(interval);
     };
