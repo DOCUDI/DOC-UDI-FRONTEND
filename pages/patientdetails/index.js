@@ -129,12 +129,14 @@ const index = () => {
               <PatientCard
                 key={index}
                 docName={item.docName}
+                docPfp={item.docPfp}
                 specialization={item.specialization}
                 clinicAddress={item.clinicAddress}
                 date={item.date}
                 time={item.time}
                 symptoms={item.symptoms}
                 prescription={item.prescription}
+                id={item._id}
               />
             ))}
           </CardBox>

@@ -24,7 +24,7 @@ const Helmet = () => {
   const email = useSelector((state) => state.login.user?.email);
   const token = useSelector((state) => state.login?.token);
   const success = useSelector((state) => state.login?.success);
-  const docPfp = useSelector((state) => state.login.user.pfp);
+  const docPfp = useSelector((state) => state.login.user?.pfp);
   const router = useRouter();
 
   const handleOpenUserMenu = (event) => {

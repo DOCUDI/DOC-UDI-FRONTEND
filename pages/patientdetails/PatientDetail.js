@@ -15,7 +15,8 @@ import {
   Span,
   TopBar,
 } from "../../components/pageComponents/previousappointmentdetails/prevDetailsStyle";
-import { patientData } from "../../components/utils/data/patientData";
+import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
 
 const PatientDetail = () => {
   const theme = useTheme();
@@ -25,7 +26,14 @@ const PatientDetail = () => {
     fontSize: "1.2rem",
     fontWeight: "400",
     boxShadow: "none",
-  };
+  };  
+  const router = useRouter()
+  // console.log("query",router.query);
+  const history = useSelector(
+    (state) => state.currentAppointment.medicalHistory
+  );
+  const data = history.find(his => his._id == router.query.key);
+  console.log("data",data);
   return (
     <Container>
       <Helmet />
@@ -46,32 +54,28 @@ const PatientDetail = () => {
         <CardHeader>
           <Avatar
             alt="Remy Sharp"
-            src="/static/images/avatar/2.jpg"
+            src={data.docPfp}
             sx={{ height: 80, width: 80 }}
           />
           <CardName>
             <SmallContentHeader>
-              {patientData.history[0].patientName}
+              {data.docName}
             </SmallContentHeader>
-            <SmallContent>{patientData.history[0].doctorSpecialization}</SmallContent>
-            <SmallContent>{patientData.history[0].doctorAddress}</SmallContent>
+            <SmallContent>{data.specialization}</SmallContent>
+            <SmallContent>{data.clinicAddress}</SmallContent>
           </CardName>
         </CardHeader>
         <SmallContent>
           <Span color={theme.palette.secondary.main}>Date :</Span>{" "}
-          {patientData.history[0].date}
+          {data.date}
         </SmallContent>
         <SmallContent>
           <Span color={theme.palette.secondary.main}>Time :</Span>{" "}
-          {patientData.history[0].time}
-        </SmallContent>
-        <SmallContent>
-          <Span color={theme.palette.secondary.main}>Symptoms :</Span>{" "}
-          {patientData.history[0].symptoms}
+          {data.time.startTime}&nbsp; - &nbsp;{data.time.endTime}
         </SmallContent>
         <SmallContent>
           <Span color={theme.palette.secondary.main}>Prescriptions :</Span>{" "}
-          {patientData.history[0].prescription}
+          {data.prescription}
         </SmallContent>
       </DetailsBox>
     </Container>
